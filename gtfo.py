@@ -285,6 +285,7 @@ def printMenu():
     rprint("[bold blue]2.[/bold blue] Show every bin")
     rprint("[bold blue]3.[/bold blue] Show every available bin")
     rprint("[bold blue]4. Show every cool shit[/bold blue]")
+    rprint("[bold yellow]show [[bold green]id[/bold green][bold yellow]][/bold yellow]")
 
     choice = input('> ')
     choice = choice.split(' ')
