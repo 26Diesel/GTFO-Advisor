@@ -148,9 +148,8 @@ def autoScan():
 
         contexts = set()
         for variant in bin["variants"]:
-            for context, value in variant["contexts"].items():
-                if value is not None:
-                    contexts.add(context)
+            for context in variant["contexts"].keys():
+                contexts.add(context)
 
         if not contexts:
             contexts.add("unprivileged")
@@ -195,11 +194,10 @@ def printEveryBin(onlyAvailable):
 
         privileges = set()
         for variant in bin["variants"]:
-            for context, value in variant["contexts"].items():
-                if value is not None:
-                    if context == "sudo": privileges.add("[bold red]sudo[/bold red]")
-                    if context == "suid": privileges.add("[bold dark_orange]suid[/bold dark_orange]")
-                    if context == "capabilities": privileges.add("[bold blue]capabilities[/bold blue]")
+            for context in variant["contexts"].keys():
+                if context == "sudo": privileges.add("[bold red]sudo[/bold red]")
+                if context == "suid": privileges.add("[bold dark_orange]suid[/bold dark_orange]")
+                if context == "capabilities": privileges.add("[bold blue]capabilities[/bold blue]")
 
         if not privileges: privileges.add("Unprivileged")
         binTable.add_row(str(bin["id"]), bin["bin"], bin["function"], ", ".join(sorted(privileges)), available)
@@ -266,17 +264,16 @@ def handleShow(id):
 
         baseCode = variant.get("code") or "N/A"
         baseComment = variant.get("comment") or ""
-        variantTable.add_row("base", baseCode, baseComment)
 
         for context, value in variant.get("contexts", {}).items():
             if value is None:
-                variantTable.add_row(context, "[dim]Not applicable[/dim]", "")
+                variantTable.add_row(context, baseCode, baseComment)
             elif isinstance(value, dict):
                 code = value.get("code") or baseCode
-                comment = value.get("comment") or ""
+                comment = value.get("comment") or baseComment
                 variantTable.add_row(context, code, comment)
             else:
-                variantTable.add_row(context, baseCode, "")
+                variantTable.add_row(context, baseCode, baseComment)
 
         rprint(variantTable)
 
@@ -285,7 +282,7 @@ def printMenu():
     rprint("[bold blue]2.[/bold blue] Show every bin")
     rprint("[bold blue]3.[/bold blue] Show every available bin")
     rprint("[bold blue]4. Show every cool shit[/bold blue]")
-    rprint("[bold yellow]show [[bold green]id[/bold green][bold yellow]][/bold yellow]")
+    rprint("[bold blue]Use [/bold blue][bold yellow]show [[bold purple]id[/bold purple][bold yellow]][/bold yellow][bold blue] to show Bin details[/bold blue]")
 
     choice = input('> ')
     choice = choice.split(' ')
