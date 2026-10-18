@@ -10,8 +10,7 @@ GTFOBins is a curated list of Unix-like executables that can be used to bypass l
 ### What is GTFO Advisor
 A Python script that analyzes the system in order to filter and recommend the best commands to achieve privilege escalation.
 
-[Official website](https://gtfobins.github.io/)
-
+## Setup
 The script requires a few popular libraries in order to run. If you are here, you have probably already installed them. However, if that's not the case:
 ```bash
 pip3 install requests rich
