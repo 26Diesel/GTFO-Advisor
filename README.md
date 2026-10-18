@@ -5,7 +5,7 @@ Terminal GTFO Bins advisor
 ### What is GTFO Bins
 GTFOBins is a curated list of Unix-like executables that can be used to bypass local security restrictions in misconfigured systems.
 
-[Official website](gtfobins.org)
+[Official website](https://gtfobins.org)
 
 ### What is GTFO Advisor
 A Python script that analyzes the system in order to filter and recommend the best commands to achieve privilege escalation.
